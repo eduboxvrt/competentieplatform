@@ -5,14 +5,13 @@
     "express": "^4.17.3",
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
-    "node-fetch": "^3.2.3",
+    "node-fetch": "^2.6.5",
     "node-schedule": "^2.1.0"
   },
   "name": "backend",
   "version": "1.0.0",
   "description": "edubox competentie platform backend",
   "main": "converter.js",
-  "devDependencies": {},
   "scripts": {
     "start": "node converter.js",
     "test": "npm test"
