@@ -1,0 +1,14 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "edubox competentie platform",
+  "main": "script.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "eduboxvrt",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.0"
+  }
+}
