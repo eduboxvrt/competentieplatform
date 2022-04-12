@@ -266,7 +266,7 @@ function loadInData(object) {
     document.getElementById("main").innerHTML = htmlGroup;
 }
 
-fetch("https://competentie-platform-backend.herokuapp.com/api/getEdubox/" + params.title)
+fetch("https://competentieplatform-backend.herokuapp.com/api/getEdubox/" + params.title)
     .then(response => {
         return response.json();
     })

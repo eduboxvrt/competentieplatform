@@ -107,7 +107,7 @@ derde.addEventListener('click', (event) => {
 });
 ////////////////////////////////////////////////////////   
 
-fetch("https://competentie-platform-backend.herokuapp.com/api/getData")
+fetch("https://competentieplatform-backend.herokuapp.com/api/getData")
     .then(response => {
         return response.json();
     })
@@ -163,7 +163,7 @@ fetch("https://competentie-platform-backend.herokuapp.com/api/getData")
         console.log(data);
     });
 
-fetch("https://competentie-platform-backend.herokuapp.com/api/getLinks")
+fetch("https://competentieplatform-backend.herokuapp.com/api/getLinks")
     .then(response => {
         return response.json();
     })
@@ -267,7 +267,7 @@ function showOrHideForm(state) {
 
         if (existingEDUbox != undefined) {
             document.getElementById("delete").style.display = "block";
-            fetch("https://competentie-platform-backend.herokuapp.com/api/getEdubox/" + existingEDUbox)
+            fetch("https://competentieplatform-backend.herokuapp.com/api/getEdubox/" + existingEDUbox)
                 .then(response => {
                     return response.json();
                 })
@@ -420,7 +420,7 @@ zoeken.addEventListener('submit', (e) => {
 deleteComp.addEventListener('click', (e) => {
     e.preventDefault();
     if (confirm("Wil je deze EDUbox verwijderen?") == true) {
-        fetch('https://competentie-platform-backend.herokuapp.com/api/deleteEdubox', {
+        fetch('https://competentieplatform-backend.herokuapp.com/api/deleteEdubox', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

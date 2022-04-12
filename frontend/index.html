@@ -75,7 +75,7 @@
     let title = document.getElementById("title");
     let start = document.getElementById("start");
 
-    fetch("https://competentie-platform-backend.herokuapp.com/api/getData")
+    fetch("https://competentieplatform-backend.herokuapp.com/api/getData")
         .then(response => {
             return response.json();
         })
@@ -131,7 +131,7 @@
             });
         });
 
-    fetch("https://competentie-platform-backend.herokuapp.com/api/getLinks")
+    fetch("https://competentieplatform-backend.herokuapp.com/api/getLinks")
         .then(response => {
             return response.json();
         })
@@ -340,7 +340,7 @@
         });
 
         if (existingEDUbox != undefined) {
-            fetch("https://competentie-platform-backend.herokuapp.com/api/getEdubox/" + existingEDUbox)
+            fetch("https://competentieplatform-backend.herokuapp.com/api/getEdubox/" + existingEDUbox)
                 .then(response => {
                     return response.json();
                 })
@@ -376,7 +376,7 @@
         if (selectedData.length > 0) {
             if (confirm("Wil je met deze data de nieuwe EDUbox maken?") == true) {
                 // console.log(JSON.stringify(selectedData));
-                fetch('https://competentie-platform-backend.herokuapp.com/api/addEdubox', {
+                fetch('https://competentieplatform-backend.herokuapp.com/api/addEdubox', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
