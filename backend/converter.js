@@ -219,7 +219,7 @@ var j = schedule.scheduleJob('0 0 * * *', function () {
 });
 
 app.get('/', (req, res) => {
-    res.send("server is up and running... V6.0.1 --- Last data update was at: " + date)
+    res.send("server is up and running... V6.1.1 --- Last data update was at: " + date)
 });
 
 app.use('/api', bgRouter);
@@ -233,7 +233,7 @@ const {
     ServerApiVersion,
     ObjectID
 } = require('mongodb');
-const uri = "mongodb+srv://EduboxAdmin:hPxvQ8Mz^eHpD7v*@cluster0.9mbeb.mongodb.net/competentie-platform?retryWrites=true&w=majority";
+const uri = "mongodb+srv://EduboxAdmin:hPxvQ8Mz^eHpD7v*@sleutelcompetentieclust.m64ax.mongodb.net/competentie-platform?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
