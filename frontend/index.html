@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="./backStyle.css">
     <script type="module" src="./backScript.js"></script>
     <link rel="icon" type="image/svg" href="./resources/images/icon.svg">
-    <title>EDUbox Admin tool | V2.4.1</title>
+    <title>EDUbox Admin tool | V2.5.0</title>
 </head>
 
 <body>
-    <p id="version">V2.4.1</p>
+    <p id="version">V2.5.0</p>
     <div id="loading">
         <img src="./resources/images/loading.gif" alt="loading">
         <h3>Competenties worden ingeladen...</h3>
@@ -81,7 +81,7 @@
         })
         .then(jsondata => {
             let duplicates = [];
-            jsondata.forEach(element => {
+            jsondata.competenties.forEach(element => {
                 let count = (element.code.match(new RegExp("\\.", "g")) || []).length;
                 let duplicate = false;
 
@@ -345,7 +345,7 @@
                     return response.json();
                 })
                 .then(jsondata => {
-                    updateData(jsondata);
+                    updateData(jsondata.data);
                 });
         }
     }

@@ -28,46 +28,118 @@ app.use(cors());
 bgRouter.route('/addEdubox')
     .post(async (req, res) => {
         title = req.body.title
-        await generateJSONFile(req.body.selectedData)
-        await generateNewLink(title);
-        res.send("done!");
+
+        let link = {
+            title: title,
+            link: `<li><a href='./EDUbox.html?title=${title}' target='_blank'>${title}</a></li>`
+        };
+        let data = {
+            title: title,
+            data: req.body.selectedData
+        };
+
+        const collectionLinks = db.collection("links");
+        collectionLinks.insertOne(link).then(result => {
+            console.log(result);
+        });
+
+        const collectionData = db.collection("eduboxData");
+        collectionData.insertOne(data).then(result => {
+            console.log(result);
+        });
+        res.send("Data file and link have been created!");
+
+        // await generateJSONFile(req.body.selectedData);
+        // await generateNewLink(title);
     });
 
 bgRouter.route('/getData')
     .get((req, res) => {
-        let data = fs.readFileSync('./data.json');
-        let json = JSON.parse(data);
-        res.send(json);
+        // let data = fs.readFileSync('./data.json');
+        // let json = JSON.parse(data);
+        // res.send(json);
+
+        const collection = db.collection("eduboxData");
+        collection.find({}).toArray((error, result) => {
+            if (error) {
+                return res.status(500).send(error);
+            }
+            res.json(result);
+        });
     });
 
 bgRouter.route('/getEdubox/:title')
     .get((req, res) => {
         let title = req.params.title;
-        let data = fs.readFileSync('./data/' + title + '.json');
-        let json = JSON.parse(data);
-        res.send(json);
+
+        // let data = fs.readFileSync('./data/' + title + '.json');
+        // let json = JSON.parse(data);
+        // res.send(json);
+
+        async function findBox() {
+            try {
+                const collection = db.collection("eduboxData");
+
+                const result = await collection.findOne({
+                    title: title
+                });
+                res.json(result);
+            } catch (err) {
+                return err;
+            }
+        }
+        findBox();
     });
 
 bgRouter.route('/getLinks')
     .get((req, res) => {
-        let data = fs.readFileSync('./links.json');
-        let json = JSON.parse(data);
-        res.send(json);
+        // let data = fs.readFileSync('./links.json');
+        // let json = JSON.parse(data);
+        // res.send(json);
+
+        const collection = db.collection("links");
+        collection.find({}).toArray((error, result) => {
+            if (error) {
+                return res.status(500).send(error);
+            }
+            res.json(result);
+        });
     });
 
 bgRouter.route('/deleteEdubox')
     .delete(async (req, res) => {
         title = req.body.title
-        await deleteEduboxFiles(title);
-        res.send("deleted!");
+
+        const collectionLinks = db.collection("links");
+        const collectionData = db.collection("eduboxData");
+
+        // await deleteEduboxFiles(title);
+        // res.send("deleted!");
+
+        async function findBox() {
+            try {
+                const result1 = await collectionLinks.deleteOne({
+                    title: title
+                });
+
+                const result2 = await collectionData.deleteOne({
+                    title: title
+                });
+                res.json(result1, result2);
+                res.send('deleted');
+            } catch (err) {
+                return err;
+            }
+        }
+        findBox();
     });
 
-async function generateJSONFile(data) {
+async function generateJSONFile(passedData) {
     try {
-        await fs.writeFile(`./data/${title}.json`, JSON.stringify(data), function (err) {
-            if (err) throw err;
-            console.log('Data file is created successfully.');
-        });
+        // await fs.writeFile(`./data/${title}.json`, JSON.stringify(passedData), function (err) {
+        //     if (err) throw err;
+        //     console.log('Data file is created successfully.');
+        // });
     } catch (err) {
         console.error(err)
     }
@@ -95,6 +167,7 @@ async function generateNewLink(title) {
     let duplicate = false;
     let data = fs.readFileSync('./links.json');
     let json = JSON.parse(data);
+
     json.forEach(link => {
         if (link.title == title) {
             duplicate = true;
@@ -107,11 +180,12 @@ async function generateNewLink(title) {
             "link": `<li><a href='./EDUbox.html?title=${title}' target='_blank'>${title}</a></li>`
         }
         json.push(newLinkObject);
+        link = json;
 
-        await fs.writeFile('./links.json', JSON.stringify(json), function (err) {
-            if (err) throw err;
-            console.log('Links file is updated successfully.');
-        });
+        // await fs.writeFile('./links.json', JSON.stringify(json), function (err) {
+        //     if (err) throw err;
+        //     console.log('Links file is updated successfully.');
+        // });
     }
 }
 
@@ -144,11 +218,35 @@ var j = schedule.scheduleJob('0 0 * * *', function () {
 });
 
 app.get('/', (req, res) => {
-    res.send("server is up and running... V5.3.2 --- Last data update was at: " + date)
+    res.send("server is up and running... V6.0.1 --- Last data update was at: " + date)
 });
 
 app.use('/api', bgRouter);
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
+});
+
+const {
+    MongoClient,
+    ServerApiVersion,
+    ObjectID
+} = require('mongodb');
+const uri = "mongodb+srv://EduboxAdmin:hPxvQ8Mz^eHpD7v*@cluster0.9mbeb.mongodb.net/competentie-platform?retryWrites=true&w=majority";
+const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverApi: ServerApiVersion.v1
+});
+
+let dbName = "competentie-platform";
+let db;
+
+client.connect(err => {
+    if (err) {
+        throw err;
+    }
+
+    db = client.db(dbName);
+    console.log("Connected correctly to server");
 });

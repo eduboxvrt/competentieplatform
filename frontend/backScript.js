@@ -116,7 +116,7 @@ fetch("https://competentieplatform-backend.herokuapp.com/api/getData")
         document.getElementById("loading").style.display = "none";
 
         let duplicates = [];
-        jsondata.forEach(element => {
+        jsondata.competenties.forEach(element => {
             let duplicate = false;
 
             let sleutelComp1;
@@ -272,7 +272,7 @@ function showOrHideForm(state) {
                     return response.json();
                 })
                 .then(jsondata => {
-                    fillInForm(jsondata, true)
+                    fillInForm(jsondata.data, true)
                 });
         } else {
             document.getElementById("delete").style.display = "none";

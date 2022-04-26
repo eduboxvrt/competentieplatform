@@ -272,7 +272,7 @@ fetch("https://competentieplatform-backend.herokuapp.com/api/getEdubox/" + param
     })
     .then(jsondata => {
         console.log(jsondata);
-        data = jsondata;
+        data = jsondata.data;
         loadInData(data);
     }).catch(err => {
         console.error(err);
