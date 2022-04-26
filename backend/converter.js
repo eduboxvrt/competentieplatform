@@ -55,17 +55,17 @@ bgRouter.route('/addEdubox')
 
 bgRouter.route('/getData')
     .get((req, res) => {
-        // let data = fs.readFileSync('./data.json');
-        // let json = JSON.parse(data);
-        // res.send(json);
+        let data = fs.readFileSync('./data.json');
+        let json = JSON.parse(data);
+        res.send(json);
 
-        const collection = db.collection("eduboxData");
-        collection.find({}).toArray((error, result) => {
-            if (error) {
-                return res.status(500).send(error);
-            }
-            res.json(result);
-        });
+        // const collection = db.collection("allData");
+        // collection.find({}).toArray((error, result) => {
+        //     if (error) {
+        //         return res.status(500).send(error);
+        //     }
+        //     res.json(result);
+        // });
     });
 
 bgRouter.route('/getEdubox/:title')
