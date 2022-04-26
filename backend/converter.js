@@ -125,7 +125,8 @@ bgRouter.route('/deleteEdubox')
                 const result2 = await collectionData.deleteOne({
                     title: title
                 });
-                res.json(result1, result2);
+                res.json(result1);
+                res.json(result2);
                 res.send('deleted');
             } catch (err) {
                 return err;
