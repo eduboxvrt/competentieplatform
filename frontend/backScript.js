@@ -116,7 +116,7 @@ fetch("https://competentieplatform-backend.herokuapp.com/api/getData")
         document.getElementById("loading").style.display = "none";
 
         let duplicates = [];
-        jsondata.competenties.forEach(element => {
+        jsondata.forEach(element => {
             let duplicate = false;
 
             let sleutelComp1;

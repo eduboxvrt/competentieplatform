@@ -81,7 +81,7 @@
         })
         .then(jsondata => {
             let duplicates = [];
-            jsondata.competenties.forEach(element => {
+            jsondata.forEach(element => {
                 let count = (element.code.match(new RegExp("\\.", "g")) || []).length;
                 let duplicate = false;
 
