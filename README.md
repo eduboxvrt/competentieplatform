@@ -1,5 +1,7 @@
 # competentieplatform
 
+UPDATE: Getting files ready for Heroku
+
 Links
 -----
 
