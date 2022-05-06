@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="./backStyle.css">
     <script type="module" src="./backScript.js"></script>
     <link rel="icon" type="image/svg" href="./resources/images/icon.svg">
-    <title>EDUbox Admin tool | V2.5.0</title>
+    <title>EDUbox Admin tool | V2.5.3</title>
 </head>
 
 <body>
-    <p id="version">V2.5.0</p>
+    <p id="version">V2.5.3</p>
     <div id="loading">
         <img src="./resources/images/loading.gif" alt="loading">
         <h3>Competenties worden ingeladen...</h3>
@@ -69,6 +69,9 @@
     let links;
     let selectedData = [];
     let selectedComps = [];
+
+    let updatingBox = false;
+    let eduboxTitle;
 
     let addBtn = document.getElementById("addBtn");
     let compForm = document.getElementById("compForm");
@@ -336,6 +339,7 @@
         links.forEach(link => {
             if (link.title == title.value) {
                 existingEDUbox = link.title;
+                eduboxTitle = link.title;
             }
         });
 
@@ -345,6 +349,8 @@
                     return response.json();
                 })
                 .then(jsondata => {
+                    updatingBox = true;
+                    addBtn.innerHTML = "Pas Aan";
                     updateData(jsondata.data);
                 });
         }
@@ -374,21 +380,51 @@
     addBtn.addEventListener('click', (e) => {
         let title = document.getElementById("title").value
         if (selectedData.length > 0) {
-            if (confirm("Wil je met deze data de nieuwe EDUbox maken?") == true) {
-                // console.log(JSON.stringify(selectedData));
-                fetch('https://competentieplatform-backend.herokuapp.com/api/addEdubox', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        selectedData,
-                        title
-                    })
-                }).then(() => {
-                    location.reload();
-                });
+
+            if (updatingBox) {
+                if (confirm("Wil je met deze data de EDUbox aanpassen") == true) {
+                    console.log(title.value);
+                    fetch('https://competentieplatform-backend.herokuapp.com/api/deleteEdubox', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            "title": eduboxTitle
+                        })
+                    }).then(() => {
+                        fetch('https://competentieplatform-backend.herokuapp.com/api/addEdubox', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                selectedData,
+                                title
+                            })
+                        }).then(() => {
+                            location.reload();
+                        });
+                    });
+                }
+            } else {
+                if (confirm("Wil je met deze data de nieuwe EDUbox maken?") == true) {
+                    fetch('https://competentieplatform-backend.herokuapp.com/api/addEdubox', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            selectedData,
+                            title
+                        })
+                    }).then(() => {
+                        location.reload();
+                    });
+                }
             }
         } else {
             alert("Er moet data meegegeven worden om een EDUbox te maken");
