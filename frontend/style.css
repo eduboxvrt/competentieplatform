@@ -97,20 +97,24 @@ i {
 
 #logo {
     position: absolute;
-    top: -40px;
+    top: -20px;
     left: -20px;
 
     width: 11vw;
     margin-top: 1%;
+
+    cursor: pointer;
 }
 
 #logo_extra {
     position: fixed;
-    bottom: 0;
+    bottom: 10px;
     right: 40px;
 
     width: 4vw;
     margin-top: 1%;
+
+    cursor: pointer;
 }
 
 #backToTop {
@@ -130,6 +134,7 @@ i {
 
     text-align: center;
     cursor: pointer;
+    border-radius: 8px;
 
     transition: .2s ease-in-out;
 }

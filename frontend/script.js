@@ -7,6 +7,7 @@ let inleiding = document.getElementById("inleiding");
 
 let mybutton = document.getElementById("backToTop");
 let logo_extra = document.getElementById("logo_extra");
+let logo = document.getElementById("logo");
 let file = document.getElementById("file");
 
 let graad = "1ste graad";
@@ -295,6 +296,13 @@ function scrollFunction() {
         logo_extra.style.display = "block";
     }
 }
+
+logo.addEventListener('click', () => {
+    window.open("https://www.vrt.be/nl/edubox");
+});
+logo_extra.addEventListener('click', () => {
+    window.open("https://www.vrt.be");
+});
 
 document.getElementById("backToTop").addEventListener('click', (e) => {
     e.preventDefault();
