@@ -31,6 +31,8 @@ header {
     margin: 3% 5% 0 5%;
     padding: 2%;
     background-color: #F3F3F3;
+
+    border-radius: 10px;
 }
 
 main {
@@ -52,6 +54,7 @@ h1 {
 
     background-color: #3462AC;
     color: white;
+    border-radius: 8px;
 }
 
 h2 {
@@ -94,10 +97,19 @@ i {
 
 #logo {
     position: absolute;
-    top: 10px;
-    left: 30px;
+    top: -40px;
+    left: -20px;
 
-    width: 7vw;
+    width: 11vw;
+    margin-top: 1%;
+}
+
+#logo_extra {
+    position: fixed;
+    bottom: 0;
+    right: 40px;
+
+    width: 4vw;
     margin-top: 1%;
 }
 
@@ -143,6 +155,7 @@ i {
     align-items: center;
 
     background-color: #F3F3F3;
+    border-radius: 10px;
 }
 
 #rightM {
@@ -158,6 +171,7 @@ i {
     font-weight: bold;
 
     cursor: pointer;
+    border-radius: 10px;
 }
 
 .menuItem {
@@ -173,6 +187,7 @@ i {
     cursor: pointer;
 
     transition: 0.2s ease-out;
+    border-radius: 10px;
 }
 
 .menuItem:hover {
@@ -191,6 +206,10 @@ i {
     color: white;
 
     transition: 0.2s ease-out;
+}
+
+.gesloten {
+    border-radius: 10px;
 }
 
 .selected:hover {
@@ -226,7 +245,8 @@ i {
     color: #3FA535;
 }
 
-/*////////////////////////////////////////////////////////////////*/
+/*/
+    ///////////////////////////////////////////////////////////////*/
 
 .compGroep {
     margin-bottom: 5%;
@@ -242,6 +262,7 @@ i {
     margin-bottom: 2%;
 
     box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.171);
+    border-radius: 10px;
 }
 
 .comp p {
@@ -294,6 +315,7 @@ i {
     color: white;
 
     padding: 1%;
+    border-radius: 5px;
 }
 
 .bubbleGroen {
@@ -301,6 +323,7 @@ i {
     color: white;
 
     padding: 1%;
+    border-radius: 5px;
 }
 
 @media only screen and (max-width: 1500px) {

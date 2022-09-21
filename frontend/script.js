@@ -6,6 +6,7 @@ let rightM = document.getElementById("rightM");
 let inleiding = document.getElementById("inleiding");
 
 let mybutton = document.getElementById("backToTop");
+let logo_extra = document.getElementById("logo_extra");
 let file = document.getElementById("file");
 
 let graad = "1ste graad";
@@ -288,8 +289,10 @@ window.onscroll = function () {
 function scrollFunction() {
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         mybutton.style.display = "block";
+        logo_extra.style.display = "none";
     } else {
         mybutton.style.display = "none";
+        logo_extra.style.display = "block";
     }
 }
 
